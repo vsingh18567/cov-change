@@ -1,0 +1,24 @@
+[tool.poetry]
+name = "diff-cov"
+version = "0.1.0"
+description = ""
+authors = ["vsingh18567 <vsingh18567@gmail.com>"]
+readme = "README.md"
+packages = [
+    { include = "diff_cov" },
+]
+
+[tool.poetry.dependencies]
+python = "^3.11"
+
+[tool.poetry.group.dev.dependencies]
+mypy = "^1.5.1"
+black = "^23.9.1"
+
+[tool.poetry.scripts]
+diff-cov = "diff_cov.main:main"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
