@@ -1,22 +1,23 @@
 [tool.poetry]
-name = "diff-cov"
+name = "cov-change"
 version = "0.1.0"
 description = ""
 authors = ["vsingh18567 <vsingh18567@gmail.com>"]
 readme = "README.md"
 packages = [
-    { include = "diff_cov" },
+    { include = "cov_change" },
 ]
 
 [tool.poetry.dependencies]
-python = "^3.11"
+python = "^3.10"
+rich = "^13.6.0"
 
 [tool.poetry.group.dev.dependencies]
 mypy = "^1.5.1"
 black = "^23.9.1"
 
 [tool.poetry.scripts]
-diff-cov = "diff_cov.main:main"
+cov-change = "cov_change.main:main"
 
 
 [build-system]
