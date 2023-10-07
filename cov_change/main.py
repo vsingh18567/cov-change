@@ -7,6 +7,7 @@ import subprocess
 from rich.console import Console
 from rich.table import Table
 
+
 def build_table(json_data: dict, verbose: bool):
     table = Table(title=f"Coverage Change {os.getcwd()}")
     columns = ["File", "Coverage", "# Executed", "# Missed"]
@@ -15,19 +16,20 @@ def build_table(json_data: dict, verbose: bool):
 
     for column in columns:
         table.add_column(column)
-    for file in json_data['files'].values():
+    for file in json_data["files"].values():
         row = [
-            file['file_name'],
+            file["file_name"],
             f"{file['coverage_percent']:.2f}%",
-            str(len(file['executed_lines'])),
-            str(len(file['missed_lines'])),
+            str(len(file["executed_lines"])),
+            str(len(file["missed_lines"])),
         ]
         if verbose:
-            row.append(file['missed_lines_str'])
-    
+            row.append(file["missed_lines_str"])
+
         table.add_row(*row)
 
     return table
+
 
 def main():
     parser = argparse.ArgumentParser()
@@ -107,12 +109,10 @@ def main():
         with open(args.output, "w") as f:
             f.write(json_data)
         json_data = json.loads(json_data)
-    
+
     table = build_table(json_data, args.verbose)
     console = Console()
     console.print(table, overflow="fold")
-
-
 
 
 if __name__ == "__main__":

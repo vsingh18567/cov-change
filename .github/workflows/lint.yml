@@ -1,0 +1,17 @@
+name: Check Black and MyPy
+on:
+    push:
+jobs:
+    check:
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v4
+            - uses: actions/setup-python@v4
+              with:
+                  python-version: 3.11
+            - name: Install dependencies
+              run: pip install black mypy
+            - name: Check Black
+              run: black --check .
+            - name: Check MyPy
+              run: mypy .

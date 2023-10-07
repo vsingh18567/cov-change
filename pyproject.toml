@@ -15,6 +15,7 @@ rich = "^13.6.0"
 [tool.poetry.group.dev.dependencies]
 mypy = "^1.5.1"
 black = "^23.9.1"
+pre-commit = "^3.4.0"
 
 [tool.poetry.scripts]
 cov-change = "cov_change.main:main"

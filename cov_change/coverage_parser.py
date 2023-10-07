@@ -4,9 +4,9 @@ from dataclasses import dataclass, asdict, is_dataclass
 
 
 class DataclassJSONEncoder(json.JSONEncoder):
-    def default(self, o):
+    def default(self, o: object):
         if is_dataclass(o):
-            return asdict(o)
+            return asdict(o)  # type: ignore
         return super().default(o)
 
 
@@ -88,7 +88,9 @@ class CoverageParser:
 
     def parse(self) -> None:
         for file_name, file_data in self.coverage_data["files"].items():
-            if file_name not in self.diff_parser.additions:
+            if file_name not in self.diff_parser.additions or not file_name.endswith(
+                ".py"
+            ):
                 continue
             line_intervals: list[tuple[int, int]] = self.diff_parser.additions[
                 file_name
@@ -114,9 +116,11 @@ class CoverageParser:
             total_missed += len(file_data.missed_lines)
         total = total_executed + total_missed
         if total == 0:
-            total_coverage_percent = 100
+            total_coverage_percent = 100.0
         else:
-            total_coverage_percent = total_executed / (total_executed + total_missed) * 100
+            total_coverage_percent = (
+                total_executed / (total_executed + total_missed) * 100
+            )
         self.summary = CoverageSummary(
             total_coverage_percent,
             total_executed,
