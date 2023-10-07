@@ -19,7 +19,7 @@ pre-commit = "^3.4.0"
 
 [tool.poetry.scripts]
 cov-change = "cov_change.main:main"
-cov-change-check = "cov_change.check:main"
+cov-change-check = "cov_change.cov_change_check:main"
 
 [build-system]
 requires = ["poetry-core"]

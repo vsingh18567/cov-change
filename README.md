@@ -20,7 +20,7 @@ cov-change [branch1] [branch2] [--coverage-file COVERAGE_FILE]  [-o --output OUT
 ```
 
 ### Options
-- `branch1` and `branch2` are the branches you want to compare. By default, `branch1` is `origin/main and `branch2` is your current commit.
+- `branch1` and `branch2` are the branches you want to compare. By default, `branch1` is `origin/main` and `branch2` is your current commit.
 - `--coverage-file COVERAGE_FILE` is the path to the coverage file. By default, it is `coverage.json`.
 - - `-o --output OUTPUT` is the path to the output JSON file. By default, it is `coverage_change.json`.
 - `-v --verbose` will print out the missing lines for each file.
