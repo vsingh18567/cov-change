@@ -8,7 +8,7 @@ from rich.console import Console
 from rich.table import Table
 
 
-def build_table(json_data: dict, verbose: bool):
+def build_table(json_data: dict, verbose: bool) -> Table:
     table = Table(title=f"Coverage Change {os.getcwd()}")
     columns = ["File", "Coverage", "# Executed", "# Missed"]
     if verbose:
@@ -31,7 +31,7 @@ def build_table(json_data: dict, verbose: bool):
     return table
 
 
-def main():
+def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument(
         "diff_branch",

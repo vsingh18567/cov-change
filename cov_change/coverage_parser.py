@@ -1,10 +1,11 @@
 from cov_change.diff_parser import DiffParser
 import json
 from dataclasses import dataclass, asdict, is_dataclass
+from typing import Any
 
 
 class DataclassJSONEncoder(json.JSONEncoder):
-    def default(self, o: object):
+    def default(self, o: object) -> Any:
         if is_dataclass(o):
             return asdict(o)  # type: ignore
         return super().default(o)
@@ -18,7 +19,7 @@ class CoverageData:
     coverage_percent: float
     missed_lines_str: str = ""
 
-    def __post_init__(self):
+    def __post_init__(self) -> None:
         self.missed_lines.sort()
         previous_line = -2
         section_start = None

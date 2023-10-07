@@ -14,4 +14,4 @@ jobs:
             - name: Check Black
               run: black --check .
             - name: Check MyPy
-              run: mypy .
+              run: mypy --config-file mypy.ini .
