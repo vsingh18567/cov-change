@@ -1,3 +1,6 @@
+"""
+Parses coverage data and returns a summary of coverage for all files
+"""
 from cov_change.diff_parser import DiffParser
 import json
 from dataclasses import dataclass, asdict, is_dataclass

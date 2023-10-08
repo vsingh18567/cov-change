@@ -48,5 +48,4 @@ cov-change-check [coverage_change_file] [--total TOTAL] [--file FILE] [-h --help
 #### Examples
 ```bash
 cov-change-check --total 80 --file 50 # check if the total coverage is at least 80%, and if each file has at least 50% coverage
-
 ```

@@ -1,3 +1,6 @@
+"""
+Entry point for cov_change.
+"""
 import json
 import os
 from dataclasses import dataclass
