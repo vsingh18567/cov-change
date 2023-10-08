@@ -49,7 +49,7 @@ class DiffParser:
             self._parse_line(line.rstrip())
         to_pop = []
         for k in self.additions.keys():
-            if k.endswith(".py"):  # only care about python files
+            if not k.endswith(".py"):  # only care about python files
                 to_pop.append(k)
         for k in to_pop:
             self.additions.pop(k)

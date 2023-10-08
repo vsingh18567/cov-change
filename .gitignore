@@ -2,6 +2,5 @@ __pycache__
 .mypy_cache
 *.diff
 .venv
-coverage.json
 dist/
-coverage_diff.json
+coverage*.json

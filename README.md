@@ -7,7 +7,7 @@ pip install cov-change
 ```
 
 ## Usage
-Assuming you've already run `pytest` with `coverage` (e.g. `python3 -m coverage pytest .`), you will have generated a `.coverage` file. To then use `cov-change`:
+Assuming you've already run `pytest` with `coverage` (e.g. `coverage run pytest .`), you will have generated a `.coverage` file. To then use `cov-change`:
 
 ```bash
 coverage json # generate a json file from the .coverage file

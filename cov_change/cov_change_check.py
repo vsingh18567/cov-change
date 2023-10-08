@@ -3,6 +3,7 @@ Entry point for coverage change check (`cov_change_check`).
 """
 import json
 import argparse
+import os
 
 
 def main() -> None:
@@ -21,7 +22,9 @@ def main() -> None:
     )
 
     args = parser.parse_args()
-    with open(args.coverage_diff_file, "r") as f:
+    if not os.path.exists(args.coverage_change_file):
+        raise Exception(f"{args.coverage_change_file} not found for coverage data")
+    with open(args.coverage_change_file, "r") as f:
         json_data = json.load(f)
 
     fail = False

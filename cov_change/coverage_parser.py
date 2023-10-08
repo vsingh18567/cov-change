@@ -5,6 +5,7 @@ from cov_change.diff_parser import DiffParser
 import json
 from dataclasses import dataclass, asdict, is_dataclass
 from typing import Any
+import os
 
 
 class DataclassJSONEncoder(json.JSONEncoder):
@@ -75,6 +76,8 @@ class CoverageSummary:
 
 class CoverageParser:
     def __init__(self, file_name: str, diff_parser: DiffParser):
+        if not os.path.exists(file_name):
+            raise Exception(f"{file_name} not found for coverage data")
         with open(file_name, "r") as f:
             self.coverage_data = json.load(f)
         self._diff_parser: DiffParser = diff_parser
