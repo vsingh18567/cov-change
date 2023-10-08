@@ -124,7 +124,6 @@ class CoverageParser:
                 file_name
             ]
             executed_line_nos: list[int] = file_data["executed_lines"]
-
             executed_overlap = CoverageParser._get_overlap(
                 line_intervals, executed_line_nos
             )

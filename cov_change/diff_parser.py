@@ -1,5 +1,5 @@
 """
-This file contains the DiffParser class, which parses the output of `git diff --unified=0 <curr_branch> <diff_branch>`.
+This file contains the DiffParser class, which parses the output of `git diff --unified=0 <diff_branch> <curr_branch>`.
 """
 from collections import defaultdict
 from typing import Any
@@ -8,7 +8,7 @@ from enum import Enum
 
 class DiffParser:
     """
-    Parses the output of `git diff --unified=0 <curr_branch> <diff_branch>`.
+    Parses the output of `git diff --unified=0 <diff_branch> <curr_branch>`.
 
     Attributes:
         self.additions: { file_name: [ (start, end), ... ] }
