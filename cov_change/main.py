@@ -75,7 +75,6 @@ def _cov_change(args: Args) -> None:
                 data = f.read()
         diff_parser = DiffParser(data)
         diff_parser.parse()
-        print(diff_parser.additions)
         coverage_parser = CoverageParser(args.coverage_file, diff_parser)
         coverage_parser.parse()
         json_data = coverage_parser.json()
