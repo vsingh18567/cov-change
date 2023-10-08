@@ -1,7 +1,10 @@
 [tool.poetry]
 name = "cov-change"
 version = "0.1.2"
-description = ""
+description = "A tool to help you find the changes in your code that are not covered by your tests"
+license = "MIT"
+repository = "https://github.com/vsingh18567/cov-change"
+homepage = "https://pypi.org/project/cov-change/"
 authors = ["vsingh18567 <vsingh18567@gmail.com>"]
 readme = "README.md"
 packages = [
