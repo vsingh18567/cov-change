@@ -133,9 +133,12 @@ class CoverageParser:
                 line_intervals, missed_line_nos
             )
             total_lines = len(executed_overlap) + len(missed_overlap)
-            coverage_percent = len(executed_overlap) / total_lines
+            if total_lines == 0:
+                coverage_ratio = 1.0
+            else:
+                coverage_ratio = len(executed_overlap) / total_lines
             self._files[file_name] = CoverageData(
-                file_name, executed_overlap, missed_overlap, coverage_percent * 100
+                file_name, executed_overlap, missed_overlap, coverage_ratio * 100
             )
 
         # get overall coverage

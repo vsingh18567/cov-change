@@ -16,11 +16,11 @@ cov-change
 By default, `cov-change` will compare your current branch to `origin/main`. The full usage is:
 
 ```bash
-cov-change [branch1] [branch2] [--coverage-file COVERAGE_FILE]  [-o --output OUTPUT] [-v --verbose] [--diff-file DIFF_FILE] [--use-coverage-diff] [-h --help]
+cov-change [diff_branch] [curr_branch] [--coverage-file COVERAGE_FILE]  [-o --output OUTPUT] [-v --verbose] [--diff-file DIFF_FILE] [--use-coverage-diff] [-h --help]
 ```
 
 ### Options
-- `branch1` and `branch2` are the branches you want to compare. By default, `branch1` is `origin/main` and `branch2` is your current commit.
+- `diff_branch` and `curr_branch` are the branches you want to compare. By default, `diff_branch` is `origin/main` and `curr_branch` is your current commit.
 - `--coverage-file COVERAGE_FILE` is the path to the coverage file. By default, it is `coverage.json`.
 - - `-o --output OUTPUT` is the path to the output JSON file. By default, it is `coverage_change.json`.
 - `-v --verbose` will print out the missing lines for each file.
