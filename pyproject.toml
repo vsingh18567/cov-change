@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "cov-change"
-version = "0.1.1"
+version = "0.1.2"
 description = ""
 authors = ["vsingh18567 <vsingh18567@gmail.com>"]
 readme = "README.md"
