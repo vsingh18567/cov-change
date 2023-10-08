@@ -1,5 +1,9 @@
+"""
+Entry point for cov_change.
+"""
 import json
 import os
+from dataclasses import dataclass
 from cov_change.coverage_parser import CoverageParser
 from cov_change.diff_parser import DiffParser
 import argparse
@@ -9,6 +13,9 @@ from rich.table import Table
 
 
 def build_table(json_data: dict, verbose: bool) -> Table:
+    """
+    Build a rich table from the json data.
+    """
     table = Table(title=f"Coverage Change {os.getcwd()}")
     columns = ["File", "Coverage", "# Executed", "# Missed"]
     if verbose:
@@ -29,6 +36,53 @@ def build_table(json_data: dict, verbose: bool) -> Table:
         table.add_row(*row)
 
     return table
+
+
+@dataclass
+class Args:
+    diff_branch: str
+    curr_branch: str
+    coverage_file: str
+    output: str
+    verbose: bool
+    diff_file: str
+    use_coverage_diff: bool
+
+
+def _cov_change(args: Args) -> None:
+    json_data = None
+
+    if args.use_coverage_diff:
+        if os.path.exists(args.output):
+            with open(args.output, "r") as f:
+                json_data = json.load(f)
+        else:
+            print(f"{args.output} not found")
+            exit(1)
+    else:
+        if args.diff_file is None:
+            output = subprocess.run(
+                ["git", "diff", "--unified=0", args.diff_branch, args.curr_branch],
+                capture_output=True,
+            )
+            data = output.stdout.decode("utf-8")
+
+        else:
+            with open(args.diff_file, "r") as f:
+                data = f.read()
+
+        diff_parser = DiffParser(data)
+        diff_parser.parse()
+        coverage_parser = CoverageParser(args.coverage_file, diff_parser)
+        coverage_parser.parse()
+        json_data = coverage_parser.json()
+        with open(args.output, "w") as f:
+            f.write(json_data)
+        json_data = json.loads(json_data)
+
+    table = build_table(json_data, args.verbose)
+    console = Console()
+    console.print(table, overflow="fold")
 
 
 def main() -> None:
@@ -80,40 +134,8 @@ def main() -> None:
         action="store_true",
     )
 
-    args = parser.parse_args()
-    json_data = None
-
-    if args.use_coverage_diff:
-        if os.path.exists(args.output):
-            with open(args.output, "r") as f:
-                json_data = json.load(f)
-        else:
-            print(f"{args.output} not found")
-            exit(1)
-    else:
-        if args.diff_file is None:
-            output = subprocess.run(
-                ["git", "diff", "--unified=0", args.diff_branch, args.curr_branch],
-                capture_output=True,
-            )
-            data = output.stdout.decode("utf-8")
-
-        else:
-            with open(args.diff_file, "r") as f:
-                data = f.read()
-
-        diff_parser = DiffParser(data)
-        diff_parser.parse()
-        coverage_parser = CoverageParser(args.coverage_file, diff_parser)
-        coverage_parser.parse()
-        json_data = coverage_parser.json()
-        with open(args.output, "w") as f:
-            f.write(json_data)
-        json_data = json.loads(json_data)
-
-    table = build_table(json_data, args.verbose)
-    console = Console()
-    console.print(table, overflow="fold")
+    args: Args = Args(**vars(parser.parse_args()))
+    _cov_change(args)
 
 
 if __name__ == "__main__":

@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "cov-change"
-version = "0.1.0"
+version = "0.1.1"
 description = ""
 authors = ["vsingh18567 <vsingh18567@gmail.com>"]
 readme = "README.md"
@@ -19,7 +19,7 @@ pre-commit = "^3.4.0"
 
 [tool.poetry.scripts]
 cov-change = "cov_change.main:main"
-cov-change-check = "cov_change.check:main"
+cov-change-check = "cov_change.cov_change_check:main"
 
 [build-system]
 requires = ["poetry-core"]
