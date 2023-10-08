@@ -5,6 +5,10 @@ from typing import Any
 
 
 class DataclassJSONEncoder(json.JSONEncoder):
+    """
+    JSON encoder that can handle dataclasses.
+    """
+
     def default(self, o: object) -> Any:
         if is_dataclass(o):
             return asdict(o)  # type: ignore
@@ -13,6 +17,10 @@ class DataclassJSONEncoder(json.JSONEncoder):
 
 @dataclass
 class CoverageData:
+    """
+    coverage data for a single file
+    """
+
     file_name: str
     executed_lines: list[int]
     missed_lines: list[int]
@@ -20,6 +28,9 @@ class CoverageData:
     missed_lines_str: str = ""
 
     def __post_init__(self) -> None:
+        """
+        convert missed_lines to a compact string
+        """
         self.missed_lines.sort()
         previous_line = -2
         section_start = None
@@ -48,6 +59,10 @@ class CoverageData:
 
 @dataclass
 class CoverageSummary:
+    """
+    coverage summary for all files
+    """
+
     total_coverage: float
     total_executed_lines: int
     total_missed_lines: int
@@ -59,17 +74,23 @@ class CoverageParser:
     def __init__(self, file_name: str, diff_parser: DiffParser):
         with open(file_name, "r") as f:
             self.coverage_data = json.load(f)
-        self.diff_parser: DiffParser = diff_parser
-        self.files: dict[str, CoverageData] = {}
+        self._diff_parser: DiffParser = diff_parser
+        self._files: dict[str, CoverageData] = {}
         self.summary: CoverageSummary | None = None
 
     @staticmethod
-    def get_overlap(
+    def _get_overlap(
         line_intervals: list[tuple[int, int]], line_nos: list[int]
     ) -> list[int]:
         """
-        key property: line_intervals and line_nos are sorted
+        returns the line numbers that are in both lists
+        line_intervals: [ (start, end), ... ] (inclusive)
+        line_nos: [ line_no, ... ]
         """
+        # both lists should be sorted, but just in case
+        line_intervals.sort()
+        line_nos.sort()
+
         interval_idx = 0
         overlap_lines = []
         for num in line_nos:
@@ -89,30 +110,32 @@ class CoverageParser:
 
     def parse(self) -> None:
         for file_name, file_data in self.coverage_data["files"].items():
-            if file_name not in self.diff_parser.additions or not file_name.endswith(
+            if file_name not in self._diff_parser.additions or not file_name.endswith(
                 ".py"
             ):
                 continue
-            line_intervals: list[tuple[int, int]] = self.diff_parser.additions[
+            line_intervals: list[tuple[int, int]] = self._diff_parser.additions[
                 file_name
             ]
             executed_line_nos: list[int] = file_data["executed_lines"]
 
-            executed_overlap = CoverageParser.get_overlap(
+            executed_overlap = CoverageParser._get_overlap(
                 line_intervals, executed_line_nos
             )
             missed_line_nos: list[int] = file_data["missing_lines"]
-            missed_overlap = CoverageParser.get_overlap(line_intervals, missed_line_nos)
+            missed_overlap = CoverageParser._get_overlap(
+                line_intervals, missed_line_nos
+            )
             total_lines = len(executed_overlap) + len(missed_overlap)
             coverage_percent = len(executed_overlap) / total_lines
-            self.files[file_name] = CoverageData(
+            self._files[file_name] = CoverageData(
                 file_name, executed_overlap, missed_overlap, coverage_percent * 100
             )
 
         # get overall coverage
         total_executed = 0
         total_missed = 0
-        for file_name, file_data in self.files.items():
+        for file_name, file_data in self._files.items():
             total_executed += len(file_data.executed_lines)
             total_missed += len(file_data.missed_lines)
         total = total_executed + total_missed
@@ -127,8 +150,11 @@ class CoverageParser:
             total_executed,
             total_missed,
             total_executed + total_missed,
-            self.files,
+            self._files,
         )
 
     def json(self) -> str:
+        """
+        returns json string of coverage summary
+        """
         return json.dumps(self.summary, indent=4, cls=DataclassJSONEncoder)

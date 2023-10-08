@@ -1,3 +1,6 @@
+"""
+Entry point for coverage change check (`cov_change_check`).
+"""
 import json
 import argparse
 

@@ -11,7 +11,7 @@ Assuming you've already run `pytest` with `coverage` (e.g. `python3 -m coverage 
 
 ```bash
 coverage json # generate a json file from the .coverage file
-cov-change # run cov-change
+cov-change
 ```
 By default, `cov-change` will compare your current branch to `origin/main`. The full usage is:
 
@@ -44,3 +44,9 @@ cov-change-check [coverage_change_file] [--total TOTAL] [--file FILE] [-h --help
 - `coverage_change_file` is the path to the coverage change file. By default, it is `coverage_change.json`.
 - `--total TOTAL` is the minimum total coverage change required. By default, it is 0.
 - `--file FILE` is the minimum coverage change required in each file. By default, it is 0.
+
+#### Examples
+```bash
+cov-change-check --total 80 --file 50 # check if the total coverage is at least 80%, and if each file has at least 50% coverage
+
+```
