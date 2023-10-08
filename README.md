@@ -3,6 +3,7 @@ Cov change is a tool to help you find the changes in your code that are not cove
 
 ## Installation
 ```bash
+pip install --upgrade pip
 pip install cov-change
 ```
 
@@ -35,7 +36,7 @@ cov-change origin/dev HEAD --coverage-file my_coverage.json -v # compare origin/
 ```
 
 ### `cov-change-check`
-`cov-change-check` checks if the generated `coverage_change.json` file meets requirements. If it does, it will exit with a non-zero exit code. This is useful for CI/CD pipelines. The full usage is:
+`cov-change-check` checks if the generated `coverage_change.json` file meets requirements. If it doesn't, it will exit with a non-zero exit code. This is useful for CI/CD pipelines. The full usage is:
 ```bash
 cov-change-check [coverage_change_file] [--total TOTAL] [--file FILE] [-h --help]
 ```
