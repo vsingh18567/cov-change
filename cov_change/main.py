@@ -13,11 +13,23 @@ from rich.console import Console
 from rich.table import Table
 
 
+class bcolors:
+    HEADER = "\033[95m"
+    OKBLUE = "\033[94m"
+    OKCYAN = "\033[96m"
+    OKGREEN = "\033[92m"
+    WARNING = "\033[93m"
+    FAIL = "\033[91m"
+    ENDC = "\033[0m"
+    BOLD = "\033[1m"
+    UNDERLINE = "\033[4m"
+
+
 def build_table(json_data: dict, verbose: bool) -> Table:
     """
     Build a rich table from the json data.
     """
-    table = Table(title=f"Coverage Change {os.getcwd()}")
+    table = Table()
     columns = ["File", "Coverage", "# Executed", "# Missed"]
     if verbose:
         columns += ["Missed Lines"]
@@ -81,7 +93,9 @@ def _cov_change(args: Args) -> None:
         with open(args.output, "w") as f:
             f.write(json_data)
         json_data = json.loads(json_data)
-
+    print(
+        f"{bcolors.OKCYAN}{bcolors.BOLD}Coverage of changes{bcolors.ENDC}: {bcolors.OKCYAN}{json_data['total_coverage']:.2f}%{bcolors.ENDC}"
+    )
     table = build_table(json_data, args.verbose)
     console = Console()
     console.print(table, overflow="fold")

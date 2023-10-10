@@ -8,7 +8,7 @@ pip install cov-change
 ```
 
 ## Usage
-Assuming you've already run `pytest` with `coverage` (e.g. `coverage run pytest .`), you will have generated a `.coverage` file. To then use `cov-change`:
+Assuming you've already run tests with `coverage` (e.g. `coverage run -m pytest`), you will have generated a `.coverage` file. To then use `cov-change`:
 
 ```bash
 coverage json # generate a json file from the .coverage file
@@ -23,7 +23,7 @@ cov-change [diff_branch] [curr_branch] [--coverage-file COVERAGE_FILE]  [-o --ou
 ### Options
 - `diff_branch` and `curr_branch` are the branches you want to compare. By default, `diff_branch` is `origin/main` and `curr_branch` is your current commit.
 - `--coverage-file COVERAGE_FILE` is the path to the coverage file. By default, it is `coverage.json`.
-- - `-o --output OUTPUT` is the path to the output JSON file. By default, it is `coverage_change.json`.
+-  `-o --output OUTPUT` is the path to the output JSON file. By default, it is `coverage_change.json`.
 - `-v --verbose` will print out the missing lines for each file.
 - `--diff-file DIFF_FILE` is the path to a pre-generated diff file. If this is not passed in, the `git diff` will be run within the `cov-change` command itself. It is recommended that you **do not** pass this argument in.
 - `--use-coverage-diff` assumes that `cov-change` has already been run once, and that the coverage change file has been generated. It will then use that diff file to generate the output.
