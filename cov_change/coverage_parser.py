@@ -35,6 +35,7 @@ class CoverageData:
         """
         convert missed_lines to a compact string
         """
+        self.missed_lines_str = ""
         self.missed_lines.sort()
         previous_line = -2
         section_start = None
@@ -161,7 +162,7 @@ class CoverageParser:
             self._files,
         )
 
-    def json(self) -> str:
+    def jsonify(self) -> str:
         """
         returns json string of coverage summary
         """

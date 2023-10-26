@@ -1,0 +1,57 @@
+diff --git a/homePage/views.py b/homePage/views.py
+index 277a628..b24e906 100644
+--- a/homePage/views.py
++++ b/homePage/views.py
+@@ -24 +24 @@ class Register(View):
+-			messages.success(request, f'Welcome {username}! Please log-in below')
++			messages.success(request, f'Welcome {username}! Please login below')
+diff --git a/mainApp/user_data.py b/mainApp/user_data.py
+index 0b638c0..26ad3d4 100644
+--- a/mainApp/user_data.py
++++ b/mainApp/user_data.py
+@@ -51,0 +52 @@ class UserData:
++			print(df)
+@@ -235,0 +237 @@ class UserData:
++		print(self.state)
+@@ -241,10 +243,9 @@ class UserData:
+-		try:
+-			for row in df.iterrows():
+-				player: Player = self.get_player(row[1])
+-				self.add_data(player, row[1])
+-			self.game_save.seasons = len(self.game_save.season_set.all())
+-			self.game_save.save()
+-			return self.state
+-		except:
+-			self.state = "PARSING"
+-			return self.state
++		for row in df.iterrows():
++			player: Player = self.get_player(row[1])
++			self.add_data(player, row[1])
++		self.game_save.seasons = len(self.game_save.season_set.all())
++		self.game_save.save()
++		return self.state
++		# except:
++		# 	self.state = "PARSING"
++		# 	return self.state
+diff --git a/mainApp/views.py b/mainApp/views.py
+index 9e7b558..8ed7315 100644
+--- a/mainApp/views.py
++++ b/mainApp/views.py
+@@ -31,0 +32,3 @@ class UploadFile(LoginRequiredMixin, View):
++				elif data['teams_in_league'] < data['position']:
++					messages.warning(request, "Your team can't finish lower than the number of teams in the league")
++					return render(request, 'mainApp/upload.html', {'pk': pk, 'form': NewSeasonForm()})
+@@ -40,0 +44 @@ class UploadFile(LoginRequiredMixin, View):
++			season.save()
+@@ -43 +46,0 @@ class UploadFile(LoginRequiredMixin, View):
+-				season.save()
+@@ -51,0 +55 @@ class UploadFile(LoginRequiredMixin, View):
++			season.delete()
+@@ -53 +56,0 @@ class UploadFile(LoginRequiredMixin, View):
+-
+@@ -287,0 +291,3 @@ class EditSeason(LoginRequiredMixin, View):
++				elif data['teams_in_league'] < data['position']:
++					messages.warning(request, "Your team can't finish lower than the number of teams in the league")
++					return redirect('edit-season', pk, pk2)
+@@ -293,0 +300 @@ class EditSeason(LoginRequiredMixin, View):
++			messages.success(request, "Season edited successfully")

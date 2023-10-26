@@ -1,3 +1,8 @@
 poetry install
 poetry build
-poetry shell
+
+for i in dist/*.whl
+do
+    pip3 install $i --force-reinstall;
+    break;
+done

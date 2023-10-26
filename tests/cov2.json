@@ -1,0 +1,42 @@
+{
+    "files": {
+        "homePage/views.py": {
+            "excluded_lines": [],
+            "executed_lines": [
+                24
+            ],
+            "missing_lines": [
+                26
+            ]
+        },
+        "randomFileThatDoesntExist": {
+            "excluded_lines": [],
+            "executed_lines": [
+                1,
+                2,
+                3
+            ],
+            "missing_lines": []
+        },
+        "mainApp/user_data.py": {
+            "excluded_lines": [],
+            "executed_lines": [
+                243,
+                244,
+                245
+            ],
+            "missing_lines": [
+                246,
+                247,
+                248
+            ]
+        }
+    },
+    "totals": {
+        "covered_lines": 0,
+        "excluded_lines": 0,
+        "missing_lines": 0,
+        "num_statements": 0,
+        "percent_covered": 100
+    }
+}
