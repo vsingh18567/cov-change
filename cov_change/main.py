@@ -50,11 +50,11 @@ def _cov_change(args: Args) -> None:
                 capture_output=True,
             )
 
-            data = output.stdout.decode("utf-8")
             if output.returncode != 0:
                 print_error(f"Error running git diff")
-                print(data)
+                print(output.stderr.decode("utf-8"))
                 raise Exception("")
+            data = output.stdout.decode("utf-8")
 
         else:
             if not os.path.exists(args.diff_file):
