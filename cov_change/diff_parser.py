@@ -61,9 +61,3 @@ class DiffParser:
             for tup in v:
                 s += f"\t{tup}\n"
         return s
-
-
-if __name__ == "__main__":
-    diff_parser = DiffParser("gdiff.diff")
-    diff_parser.parse()
-    print(diff_parser.additions)

@@ -1,0 +1,29 @@
+{
+    "files": {
+        "homePage/views.py": {
+            "excluded_lines": [],
+            "executed_lines": [
+                24
+            ],
+            "missing_lines": [
+                26
+            ]
+        },
+        "randomFileThatDoesntExist": {
+            "excluded_lines": [],
+            "executed_lines": [
+                1,
+                2,
+                3
+            ],
+            "missing_lines": []
+        }
+    },
+    "totals": {
+        "covered_lines": 0,
+        "excluded_lines": 0,
+        "missing_lines": 0,
+        "num_statements": 0,
+        "percent_covered": 100
+    }
+}

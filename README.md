@@ -17,7 +17,7 @@ cov-change
 By default, `cov-change` will compare your current branch to `origin/main`. The full usage is:
 
 ```bash
-cov-change [diff_branch] [curr_branch] [--coverage-file COVERAGE_FILE]  [-o --output OUTPUT] [-v --verbose] [--diff-file DIFF_FILE] [--use-coverage-diff] [-h --help]
+cov-change [diff_branch] [curr_branch] [--coverage-file COVERAGE_FILE]  [-o --output OUTPUT] [-v --verbose] [--diff_file DIFF_FILE] [--use-coverage-diff] [-h --help]
 ```
 
 ### Options
