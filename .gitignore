@@ -1,6 +1,4 @@
 __pycache__
 .mypy_cache
-./*.diff
 .venv
 dist/
-./coverage*.json
