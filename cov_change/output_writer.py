@@ -67,7 +67,7 @@ def print_output(summary: CoverageSummary, verbose: bool, format: str) -> None:
         console.print(table, overflow="fold")
     elif format == "markdown":
         table = build_table_markdown(summary, verbose)
-        print(f"## Coverage of changes: {summary.total_coverage:.2f}%\n\n")
+        print(f"**Coverage of changes: {summary.total_coverage:.2f}%**\n\n")
         print(table)
     else:
         raise Exception(f"Unknown format {format}")
