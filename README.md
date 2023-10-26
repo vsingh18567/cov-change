@@ -22,17 +22,18 @@ cov-change [diff_branch] [curr_branch] [--coverage-file COVERAGE_FILE]  [-o --ou
 
 ### Options
 - `diff_branch` and `curr_branch` are the branches you want to compare. By default, `diff_branch` is `origin/main` and `curr_branch` is your current commit.
-- `--coverage-file COVERAGE_FILE` is the path to the coverage file. By default, it is `coverage.json`.
+- `--coverage_file COVERAGE_FILE` is the path to the coverage file. By default, it is `coverage.json`.
 -  `-o --output OUTPUT` is the path to the output JSON file. By default, it is `coverage_change.json`.
 - `-v --verbose` will print out the missing lines for each file.
-- `--diff-file DIFF_FILE` is the path to a pre-generated diff file. If this is not passed in, the `git diff` will be run within the `cov-change` command itself. It is recommended that you **do not** pass this argument in.
-- `--use-coverage-diff` assumes that `cov-change` has already been run once, and that the coverage change file has been generated. It will then use that diff file to generate the output.
+- `--diff_file DIFF_FILE` is the path to a pre-generated diff file. If this is not passed in, the `git diff` will be run within the `cov-change` command itself. It is recommended that you **do not** pass this argument in.
+- `--use_coverage_diff` assumes that `cov-change` has already been run once, and that the coverage change file has been generated. It will then use that diff file to generate the output.
+- `-f --format {cli,markdown}` is the format of the output. By default, it is `cli` and outputs a formatted table. If `markdown` is passed in, it will output a markdown table.
 
 ### Examples
 ```bash
 cov-change # compare origin/main to current commit
 cov-change origin/dev HEAD # compare origin/dev to the current commit
-cov-change origin/dev HEAD --coverage-file my_coverage.json -v # compare origin/dev to the current commit, using my_coverage.json as the coverage file and printing out the missing lines
+cov-change origin/dev HEAD --coverage_file my_coverage.json -v # compare origin/dev to the current commit, using my_coverage.json as the coverage file and printing out the missing lines
 ```
 
 ### `cov-change-check`
