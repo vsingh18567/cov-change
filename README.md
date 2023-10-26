@@ -17,7 +17,7 @@ cov-change
 By default, `cov-change` will compare your current branch to `origin/main`. The full usage is:
 
 ```bash
-cov-change [diff_branch] [curr_branch] [--coverage-file COVERAGE_FILE]  [-o --output OUTPUT] [-v --verbose] [--diff_file DIFF_FILE] [--use-coverage-diff] [-h --help]
+cov-change [diff_branch] [curr_branch] [--coverage-file COVERAGE_FILE]  [-o --output OUTPUT] [-v --verbose] [-f --format {cli,markdown}] [--diff_file DIFF_FILE] [--use-coverage-diff] [-h --help]
 ```
 
 ### Options
@@ -25,9 +25,9 @@ cov-change [diff_branch] [curr_branch] [--coverage-file COVERAGE_FILE]  [-o --ou
 - `--coverage_file COVERAGE_FILE` is the path to the coverage file. By default, it is `coverage.json`.
 -  `-o --output OUTPUT` is the path to the output JSON file. By default, it is `coverage_change.json`.
 - `-v --verbose` will print out the missing lines for each file.
+-  `-f --format {cli,markdown}` is the format of the output. By default, it is `cli` and outputs a formatted table. If `markdown` is passed in, it will output a markdown table.
 - `--diff_file DIFF_FILE` is the path to a pre-generated diff file. If this is not passed in, the `git diff` will be run within the `cov-change` command itself. It is recommended that you **do not** pass this argument in.
 - `--use_coverage_diff` assumes that `cov-change` has already been run once, and that the coverage change file has been generated. It will then use that diff file to generate the output.
-- `-f --format {cli,markdown}` is the format of the output. By default, it is `cli` and outputs a formatted table. If `markdown` is passed in, it will output a markdown table.
 
 ### Examples
 ```bash
