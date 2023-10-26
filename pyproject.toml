@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "cov-change"
-version = "0.1.3"
+version = "0.1.4"
 description = "A tool to help you find the changes in your code that are not covered by your tests"
 license = "MIT"
 repository = "https://github.com/vsingh18567/cov-change"
